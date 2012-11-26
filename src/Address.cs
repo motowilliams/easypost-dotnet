@@ -53,15 +53,5 @@ namespace Easypost
                 return hashCode;
             }
         }
-
-        public static bool operator ==(Address left, Address right)
-        {
-            return Equals(left, right);
-        }
-
-        public static bool operator !=(Address left, Address right)
-        {
-            return !Equals(left, right);
-        }
     }
 }

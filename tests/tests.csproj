@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="EasyPostContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

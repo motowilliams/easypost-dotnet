@@ -32,15 +32,5 @@ namespace Easypost
                 return ((Address != null ? Address.GetHashCode() : 0)*397) ^ (Message != null ? Message.GetHashCode() : 0);
             }
         }
-
-        public static bool operator ==(EasyPostAddress left, EasyPostAddress right)
-        {
-            return Equals(left, right);
-        }
-
-        public static bool operator !=(EasyPostAddress left, EasyPostAddress right)
-        {
-            return !Equals(left, right);
-        }
     }
 }

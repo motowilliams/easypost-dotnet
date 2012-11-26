@@ -105,24 +105,26 @@ namespace Easypost
 
         private T Execute<T, TR>(TR model, string apiUri) where TR : IEncodable
         {
-            var client = CreateClient();
+            using (var client = CreateClient())
+            {
+                HttpContent content = model.AsFormUrlEncodedContent();
 
-            HttpContent content = model.AsFormUrlEncodedContent();
-
-            HttpResponseMessage httpResponseMessage = client.PostAsync(apiUri, content).Result;
-            httpResponseMessage.EnsureSuccessStatusCode();
-            var response = httpResponseMessage.Content.ReadAsAsync<T>().Result;
-            return response;
+                HttpResponseMessage httpResponseMessage = client.PostAsync(apiUri, content).Result;
+                httpResponseMessage.EnsureSuccessStatusCode();
+                var response = httpResponseMessage.Content.ReadAsAsync<T>().Result;
+                return response;
+            }
         }
 
         private T Execute<T>(string apiUri)
         {
-            var client = CreateClient();
-
-            HttpResponseMessage httpResponseMessage = client.PostAsync(apiUri, null).Result;
-            httpResponseMessage.EnsureSuccessStatusCode();
-            var response = httpResponseMessage.Content.ReadAsAsync<T>().Result;
-            return response;
+            using (var client = CreateClient())
+            {
+                HttpResponseMessage httpResponseMessage = client.PostAsync(apiUri, null).Result;
+                httpResponseMessage.EnsureSuccessStatusCode();
+                var response = httpResponseMessage.Content.ReadAsAsync<T>().Result;
+                return response;
+            }
         }
     }
 }
