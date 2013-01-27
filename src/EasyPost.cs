@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Easypost
 {
-    /// <seealso href="https://www.easypost.co/docs"/>
+    /// <seealso href="https://www.geteasypost.com/docs"/>
     public class EasyPost
     {
         public string ApiKey { get; private set; }
@@ -16,7 +16,7 @@ namespace Easypost
         public string GetPostageUri { get; private set; }
         public string ListPostageUri { get; private set; }
 
-        public EasyPost(string apiKey, string baseAddress = "https://www.easypost.co/", string verifyAddressUri = "/api/address/verify", string calculatePostageUri = "/api/postage/rates", string purchasePostageUri = "/api/postage/buy", string getPostageUri = "/api/postage/get", string listPostageUri = "/api/postage/list")
+        public EasyPost(string apiKey, string baseAddress = "https://www.geteasypost.com/", string verifyAddressUri = "/api/address/verify", string calculatePostageUri = "/api/postage/rates", string purchasePostageUri = "/api/postage/buy", string getPostageUri = "/api/postage/get", string listPostageUri = "/api/postage/list")
         {
             ApiKey = apiKey;
             BaseAddress = baseAddress;
@@ -32,7 +32,7 @@ namespace Easypost
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        /// <seealso cref="https://www.easypost.co/docs#addresses-verification"/>
+        /// <seealso cref="https://www.geteasypost.com/docs#addresses-verification"/>
         public EasyPostAddress VerifyAddress(Address model)
         {
             if (string.IsNullOrWhiteSpace(VerifyAddressUri))
@@ -45,7 +45,7 @@ namespace Easypost
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        /// <seealso cref="https://www.easypost.co/docs#postage-rates"/>
+        /// <seealso cref="https://www.geteasypost.com/docs#postage-rates"/>
         public EasyPostRates CalculatePostage(PostageRate model)
         {
             if (string.IsNullOrWhiteSpace(CalculatePostageUri))
@@ -58,7 +58,7 @@ namespace Easypost
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        /// <seealso cref="https://www.easypost.co/docs#postage-buying"/>
+        /// <seealso cref="https://www.geteasypost.com/docs#postage-buying"/>
         public EasyPostPostage BuyPostage(PostagePurchase model)
         {
             if (string.IsNullOrWhiteSpace(PurchasePostageUri))
@@ -67,11 +67,11 @@ namespace Easypost
         }
 
         /// <summary>
-        /// If you need to access the postage label, it is located at https://www.easypost.co/assets/<label_file_name> You can also lookup other details for your previously purchased postage, such as the price paid or the tracking code. Purchased postage is retrieved using the label_file_name.
+        /// If you need to access the postage label, it is located at https://www.geteasypost.com/assets/<label_file_name> You can also lookup other details for your previously purchased postage, such as the price paid or the tracking code. Purchased postage is retrieved using the label_file_name.
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        /// <seealso cref="https://www.easypost.co/docs#postage-lookups"/>
+        /// <seealso cref="https://www.geteasypost.com/docs#postage-lookups"/>
         public EasyPostPostage GetPostage(ParcelFileName model)
         {
             if (string.IsNullOrWhiteSpace(GetPostageUri))
@@ -83,7 +83,7 @@ namespace Easypost
         /// You can also request a list of all existing postage label_file_names. The only data returned is an array of label_file_names you have access to.
         /// </summary>
         /// <returns></returns>
-        /// <seealso cref="https://www.easypost.co/docs#postage-lookups"/>
+        /// <seealso cref="https://www.geteasypost.com/docs#postage-lookups"/>
         public EasyPostPostageList ListPostage()
         {
             if (string.IsNullOrWhiteSpace(ListPostageUri))
