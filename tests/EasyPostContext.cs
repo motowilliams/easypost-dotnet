@@ -8,7 +8,7 @@ namespace tests
     public class EasyPostContext
     {
         /// <summary>
-        /// Please visit https://www.easypost.co/ for a Api key
+        /// Please visit https://www.geteasypost.com/ for a Api key
         /// </summary>
         public static string ApiKey = "ENTER_API_KEY";
 
@@ -51,7 +51,7 @@ namespace tests
     public class when_purchasing_predefined_package_postage : EasyPostContext
     {
         private Because of = () =>
-            response = EasyPost.BuyPostage(TestData.predefinedPostagePurchase);
+            response = EasyPost.BuyPostage(TestData.PredefinedPostagePurchase);
 
         It should_return_tracking_code = () =>
             response.Tracking_Code.ShouldNotBeEmpty();
@@ -63,7 +63,7 @@ namespace tests
     public class when_purchasing_custom_package_postage : EasyPostContext
     {
         private Because of = () =>
-            response = EasyPost.BuyPostage(TestData.customPostagePurchase);
+            response = EasyPost.BuyPostage(TestData.CustomPostagePurchase);
 
         It should_return_tracking_code = () =>
             response.Tracking_Code.ShouldNotBeEmpty();
@@ -75,7 +75,7 @@ namespace tests
     public class when_calculating_predefined_package_postage : EasyPostContext
     {
         private Because of = () =>
-            response = EasyPost.CalculatePostage(new PostageRate { Parcel = TestData.predefinedParcel, Zip = new Zip { To = "94107", From = "59847" } });
+            response = EasyPost.CalculatePostage(new PostageRate { Parcel = TestData.PredefinedParcel, Zip = new Zip { To = "94107", From = "59847" } });
 
         It should_return_at_least_one_rate = () =>
             response.Rates.Length.ShouldBeGreaterThan(0);
@@ -87,7 +87,7 @@ namespace tests
     public class when_calculating_custom_package_postage : EasyPostContext
     {
         private Because of = () =>
-            response = EasyPost.CalculatePostage(new PostageRate { Parcel = TestData.customParcel, Zip = new Zip { To = "94107", From = "59847" } });
+            response = EasyPost.CalculatePostage(new PostageRate { Parcel = TestData.CustomParcel, Zip = new Zip { To = "94107", From = "59847" } });
 
         It should_return_at_least_one_rate = () =>
             response.Rates.Length.ShouldBeGreaterThan(0);
@@ -99,10 +99,10 @@ namespace tests
     public class when_validating_complete_address : EasyPostContext
     {
         private Because of = () =>
-            response = EasyPost.VerifyAddress(TestData._inputAddress);
+            response = EasyPost.VerifyAddress(TestData.InputAddress);
 
         It should_return_same_address = () =>
-            response.ShouldEqual<EasyPostAddress>(new EasyPostAddress { Address = TestData._inputAddress });
+            response.ShouldEqual<EasyPostAddress>(new EasyPostAddress { Address = TestData.OutputAddress });
 
         protected static EasyPostAddress response;
     }
@@ -112,15 +112,15 @@ namespace tests
     {
         private Because of = () =>
             {
-                removedZip = TestData._inputAddress.Zip;
-                TestData._inputAddress.Zip = null;
-                response = EasyPost.VerifyAddress(TestData._inputAddress);
+                removedZip = TestData.InputAddress.Zip;
+                TestData.InputAddress.Zip = null;
+                response = EasyPost.VerifyAddress(TestData.InputAddress);
             };
 
         private It should_return_complete_address = () =>
             {
-                TestData._inputAddress.Zip = removedZip;
-                response.ShouldEqual<EasyPostAddress>(new EasyPostAddress {Address = TestData._inputAddress});
+                TestData.InputAddress.Zip = removedZip;
+                response.ShouldEqual<EasyPostAddress>(new EasyPostAddress { Address = TestData.OutputAddress });
             };
 
         protected static EasyPostAddress response;
